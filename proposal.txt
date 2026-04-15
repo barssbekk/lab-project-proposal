@@ -1,0 +1,20 @@
+// Overview
+The project simulates a haunted house
+where different rooms have paranormal activity.
+The activity changes over time making the house more dangerous as time passes.
+
+// Impl
+It uses std::map where each key is a room name (like Basement or Hallway).
+Each room stores an array of three lists.
+The lists have manifestations, atmospheric changes and disturbance events.
+The program will read data from a file to fill up the map
+
+// Sim
+The simulation runs in time steps.
+At each step, the program may add or remove activity in each room.
+For example, a ghost may appear, lights may flicker, or a door may slam.
+As time goes on, the activity becomes more frequent.
+
+// Time periods
+The simulation will run for at least 25 time steps.
+The program will show the starting state and how the house changes over time.
