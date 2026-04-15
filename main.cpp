@@ -1,5 +1,6 @@
 // ------PSEUDOCODE------
 // Include libraries
+// Define constants if needed
 
 // Function: runSimulation
 // Inputs: house map and number of time steps
@@ -46,5 +47,10 @@
 using namespace std;
 
 int main() {
-    
+    // FIXME: add const for time_period and categ
+    map<string, array<list<string>, 3>> house{};
+
+    house["Basement"][0].push_back("Ghost");
+
+    return 0;
 }
