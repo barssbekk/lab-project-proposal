@@ -1,0 +1,50 @@
+// ------PSEUDOCODE------
+// Include libraries
+
+// Function: runSimulation
+// Inputs: house map and number of time steps
+
+// main function
+
+    // Create a map called house
+
+    // Open the input file
+        // If the file does not open, print an error and stop
+
+    // Read each line from the file
+        // Get room name, category, and value
+        // If category is manifestation, add to list 0
+        // If category is atmospheric change, add to list 1
+        // If category is disturbance event, add to list 2
+
+    // Print the starting state of the house
+
+    // Call runSimulation with 25 time steps
+
+// runSimulation function
+
+    // Loop for each time step (at least 25 times)
+        // Go through each room
+
+            // add or remove a manifestation
+
+            // add or remove an atmospheric change
+
+            // add trigger a disturbance event
+
+        // Print what changed in this step
+
+    // Print the final state
+
+
+// ------ACTUAL CODE------
+
+#include <iostream>
+#include <map>
+#include <list>
+#include <array>
+using namespace std;
+
+int main() {
+    
+}
