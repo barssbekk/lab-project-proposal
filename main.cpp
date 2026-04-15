@@ -39,18 +39,32 @@
 
 
 // ------ACTUAL CODE------
-
 #include <iostream>
 #include <map>
 #include <list>
 #include <array>
 using namespace std;
 
+void runSimulation(map<string, array<list<string>, 3>>& house, const int steps) {
+    for (int i{1}; i <= steps; ++i) {
+        cout << "Time Step " << i << endl;
+
+        for (auto& room : house)
+            cout << "Room: " << room.first << '\n';
+    }
+}
+
 int main() {
     // FIXME: add const for time_period and categ
     map<string, array<list<string>, 3>> house{};
 
     house["Basement"][0].push_back("Ghost");
+
+    for (const auto& room : house)
+        cout << room.first << " loaded\n";
+    cout << "----------------\n";
+
+    runSimulation(house, 25);
 
     return 0;
 }
