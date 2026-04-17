@@ -51,7 +51,7 @@ constexpr int MAX_STEPS{25};
 
 constexpr int MANIFESTATIONS{0};
 constexpr int ATMOSPHERIC{1};
-constexpr int DISTURBANCE{3};
+constexpr int DISTURBANCE{2};
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
     for (int i{1}; i <= steps; ++i) {
@@ -82,10 +82,21 @@ int main() {
         string category{inputLine.substr(pos1 + 1, pos2 - (pos1 + 1))};
                                                      // final - initial (position)
         string value{inputLine.substr(pos2 + 1)};
+
+        int index{};
+
+        if (category == "manifestation")
+            index = MANIFESTATIONS;
+        else if (category == "atmospheric")
+            index = ATMOSPHERIC;
+        else if (category == "disturbance")
+            index = DISTURBANCE;
+        house[room][index].push_back(value);
     }
 
     house["Basement"][MANIFESTATIONS].emplace_back("Ghost");
 
+    // test
     // for (const auto& room : house)
     //     cout << room.first << " loaded\n";
     // cout << "----------------\n";
