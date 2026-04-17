@@ -45,7 +45,13 @@
 #include <array>
 using namespace std;
 
-void runSimulation(map<string, array<list<string>, 3>>& house, const int steps) {
+const int MAX_ELEMENT{3};
+
+const int MANIFESTATIONS{0};
+const int ATMOSPHERIC{1};
+const int DISTURBANCE{3};
+
+void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
     for (int i{1}; i <= steps; ++i) {
         cout << "Time Step " << i << endl;
 
@@ -55,8 +61,7 @@ void runSimulation(map<string, array<list<string>, 3>>& house, const int steps) 
 }
 
 int main() {
-    // FIXME: add const for time_period and categ
-    map<string, array<list<string>, 3>> house{};
+    map<string, array<list<string>, MAX_ELEMENT>> house{};
 
     house["Basement"][0].push_back("Ghost");
 
