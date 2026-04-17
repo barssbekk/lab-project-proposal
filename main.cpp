@@ -74,8 +74,14 @@ int main() {
 
     string inputLine{};
 
-    while (getline(data, inputLine)) {
-        size_t pos1{inputLine.find(',')};
+    while (getline(data, inputLine)) { //
+        size_t pos1{inputLine.find(',')}; // starts from 0
+        size_t pos2{inputLine.find(',', pos1 + 1)};
+
+        string room{inputLine.substr(0, pos1)};
+        string category{inputLine.substr(pos1 + 1, pos2 - (pos1 + 1))};
+                                                     // final - initial (position)
+        string value{inputLine.substr(pos2 + 1)};
     }
 
     house["Basement"][MANIFESTATIONS].emplace_back("Ghost");
