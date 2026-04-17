@@ -75,7 +75,7 @@ int main() {
     string inputLine{};
 
     while (getline(data, inputLine)) {
-
+        size_t pos1{inputLine.find(',')};
     }
 
     house["Basement"][MANIFESTATIONS].emplace_back("Ghost");
