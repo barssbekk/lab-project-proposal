@@ -1,0 +1,97 @@
+Basement,manifestation,Ghost
+Basement,manifestation,Shadow Figure
+Basement,atmospheric,Cold Air
+Basement,atmospheric,Flickering Lights
+Basement,disturbance,Footsteps
+Basement,disturbance,Door Slam
+
+Hallway,manifestation,Whispering Spirit
+Hallway,manifestation,Dark Silhouette
+Hallway,atmospheric,Chilly Breeze
+Hallway,atmospheric,Dim Lights
+Hallway,disturbance,Knocking Sounds
+Hallway,disturbance,Floor Creak
+
+Bedroom,manifestation,Apparition
+Bedroom,manifestation,Night Figure
+Bedroom,atmospheric,Cold Spot
+Bedroom,atmospheric,Heavy Air
+Bedroom,disturbance,Bed Movement
+Bedroom,disturbance,Closet Noise
+
+Kitchen,manifestation,Poltergeist
+Kitchen,manifestation,Invisible Presence
+Kitchen,atmospheric,Strange Smell
+Kitchen,atmospheric,Temperature Drop
+Kitchen,disturbance,Utensil Clatter
+Kitchen,disturbance,Cabinet Slam
+
+Attic,manifestation,Old Spirit
+Attic,manifestation,Watcher
+Attic,atmospheric,Dust Movement
+Attic,atmospheric,Cold Wind
+Attic,disturbance,Box Movement
+Attic,disturbance,Wood Creak
+
+Bathroom,manifestation,Mirror Ghost
+Bathroom,manifestation,Shadow Face
+Bathroom,atmospheric,Foggy Mirror
+Bathroom,atmospheric,Water Chill
+Bathroom,disturbance,Tap Drip
+Bathroom,disturbance,Shower Noise
+
+Garage,manifestation,Car Shadow
+Garage,manifestation,Unknown Figure
+Garage,atmospheric,Oil Smell
+Garage,atmospheric,Cold Draft
+Garage,disturbance,Metal Clang
+Garage,disturbance,Door Rattle
+
+LivingRoom,manifestation,Sitting Figure
+LivingRoom,manifestation,TV Reflection Ghost
+LivingRoom,atmospheric,Static Air
+LivingRoom,atmospheric,Light Flicker
+LivingRoom,disturbance,TV Turning On
+LivingRoom,disturbance,Chair Movement
+
+DiningRoom,manifestation,Dinner Ghost
+DiningRoom,manifestation,Chair Shadow
+DiningRoom,atmospheric,Cold Table
+DiningRoom,atmospheric,Still Air
+DiningRoom,disturbance,Plate Noise
+DiningRoom,disturbance,Glass Shake
+
+Stairs,manifestation,Climbing Spirit
+Stairs,manifestation,Falling Shadow
+Stairs,atmospheric,Wind Gust
+Stairs,atmospheric,Dark Corners
+Stairs,disturbance,Step Creak
+Stairs,disturbance,Running Sounds
+
+Office,manifestation,Typing Ghost
+Office,manifestation,Chair Figure
+Office,atmospheric,Paper Movement
+Office,atmospheric,Cold Desk
+Office,disturbance,Keyboard Noise
+Office,disturbance,Drawer Slam
+
+Library,manifestation,Book Spirit
+Library,manifestation,Silent Watcher
+Library,atmospheric,Old Dust
+Library,atmospheric,Heavy Silence
+Library,disturbance,Book Falling
+Library,disturbance,Shelf Shake
+
+GuestRoom,manifestation,Visitor Ghost
+GuestRoom,manifestation,Hidden Figure
+GuestRoom,atmospheric,Cold Bed
+GuestRoom,atmospheric,Air Shift
+GuestRoom,disturbance,Door Knock
+GuestRoom,disturbance,Window Tap
+
+Balcony,manifestation,Outside Shadow
+Balcony,manifestation,Edge Watcher
+Balcony,atmospheric,Wind Chill
+Balcony,atmospheric,Night Fog
+Balcony,disturbance,Railing Shake
+Balcony,disturbance,Footstep Echo

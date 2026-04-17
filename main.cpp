@@ -43,9 +43,11 @@
 #include <map>
 #include <list>
 #include <array>
+#include <fstream>
 using namespace std;
 
 constexpr int MAX_ELEMENT{3};
+constexpr int MAX_STEPS{25};
 
 constexpr int MANIFESTATIONS{0};
 constexpr int ATMOSPHERIC{1};
@@ -63,13 +65,26 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
 int main() {
     map<string, array<list<string>, MAX_ELEMENT>> house{};
 
+    // open data
+    fstream data{"data.txt"};
+    if (!data) {
+        cerr << "File not found\n";
+        return 1;
+    }
+
+    string inputLine{};
+
+    while (getline(data, inputLine)) {
+
+    }
+
     house["Basement"][MANIFESTATIONS].emplace_back("Ghost");
 
-    for (const auto& room : house)
-        cout << room.first << " loaded\n";
-    cout << "----------------\n";
-
-    runSimulation(house, 25);
+    // for (const auto& room : house)
+    //     cout << room.first << " loaded\n";
+    // cout << "----------------\n";
+    //
+    // runSimulation(house, 25);
 
     return 0;
 }
