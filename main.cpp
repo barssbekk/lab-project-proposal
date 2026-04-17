@@ -45,11 +45,11 @@
 #include <array>
 using namespace std;
 
-const int MAX_ELEMENT{3};
+constexpr int MAX_ELEMENT{3};
 
-const int MANIFESTATIONS{0};
-const int ATMOSPHERIC{1};
-const int DISTURBANCE{3};
+constexpr int MANIFESTATIONS{0};
+constexpr int ATMOSPHERIC{1};
+constexpr int DISTURBANCE{3};
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
     for (int i{1}; i <= steps; ++i) {
@@ -63,7 +63,7 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
 int main() {
     map<string, array<list<string>, MAX_ELEMENT>> house{};
 
-    house["Basement"][0].push_back("Ghost");
+    house["Basement"][MANIFESTATIONS].emplace_back("Ghost");
 
     for (const auto& room : house)
         cout << room.first << " loaded\n";
