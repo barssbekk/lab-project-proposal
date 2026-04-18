@@ -59,6 +59,8 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house);
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, int steps);
 
+void randDisturbance();
+
 
 int main() {
     map<string, array<list<string>, MAX_ELEMENT>> house{};
@@ -126,7 +128,7 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
     for (int i{1}; i <= steps; ++i) {
         cout << "\nTime Step " << i << '\n';
-        for (auto& room : house) { // remove
+        for (auto& room : house) { // remove manif
             if (!room.second[MANIFESTATIONS].empty()) {
                 room.second[MANIFESTATIONS].pop_back();
                 cout << "\tRemoved manifestation from " << room.first << '\n';
@@ -134,13 +136,22 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
                 // cout << "\tNo manifestations in " << room.first << '\n';
             }
 
+            if (!room.second[ATMOSPHERIC].empty()) {
+                room.second[ATMOSPHERIC].pop_back();
+            }
+
             // FIXME: using hardcoded disturbance, replace with var/event
-            room.second[DISTURBANCE].push_back("Footstep"); // place holder
+            room.second[DISTURBANCE].push_back("Footstep"); // place holder // add DISTURBANCE
 
             if (room.second[DISTURBANCE].size() > MAX_DISTURBANCES) {
                 room.second[DISTURBANCE].pop_front();
             }
+
         }
     }
     printHouse(house);
+}
+
+void randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house) {
+    while ()
 }
