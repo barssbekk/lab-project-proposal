@@ -44,6 +44,7 @@
 #include <list>
 #include <array>
 #include <fstream>
+#include <cstdlib>
 using namespace std;
 
 constexpr int MAX_ELEMENT{3};
@@ -59,7 +60,7 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house);
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, int steps);
 
-void randDisturbance();
+string randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house);
 
 
 int main() {
@@ -141,7 +142,7 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
             }
 
             // FIXME: using hardcoded disturbance, replace with var/event
-            room.second[DISTURBANCE].push_back("Footstep"); // place holder // add DISTURBANCE
+            room.second[DISTURBANCE].push_back(randDisturbance(house)); // place holder // add DISTURBANCE
 
             if (room.second[DISTURBANCE].size() > MAX_DISTURBANCES) {
                 room.second[DISTURBANCE].pop_front();
@@ -153,6 +154,7 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
 }
 
 string randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house) {
+    srand(0);
     vector<string> distCollect{};
     for (auto& room : house) {
         for (auto& dist : room.second[DISTURBANCE]) {
@@ -160,6 +162,7 @@ string randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house) {
         }
     }
     //  int r = min + std::rand() % (max - min + 1);
-    int rndMin{0};
-    int rndNum{rnd} // TODO: add rnd
+    constexpr int rndMin{0};
+    const size_t rndNum{ rndMin + rand() % (distCollect.size() - 1 - rndMin + 1) }; // TODO: add rnd
+    return distCollect.at(rndNum);
 }
