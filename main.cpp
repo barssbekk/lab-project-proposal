@@ -91,7 +91,6 @@ int main() {
 
     cout << "Initial State:\n";
     printHouse(house);
-    cout << "111111111";
     runSimulation(house, MAX_STEPS);
 
     return 0;
@@ -125,11 +124,14 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
     for (int i{1}; i <= steps; ++i) {
         cout << "\nTime Step " << i << endl;
-        for (auto& room : house) {
+        for (auto& room : house) { // remove
             if (!room.second[MANIFESTATIONS].empty()) {
                 room.second[MANIFESTATIONS].pop_back();
+                cout << "\tRemoved manifestation from" << room.first << '\n';
             } else
-                cout << "Room is empty\n";
+                cout << "\tNo manifestations in " << room.first << '\n';
+            // FIXME: using hardcoded disturbance, replace with var/event
+            room.second[DISTURBANCE].push_back("Footstep"); // place holder
         }
     }
 }
