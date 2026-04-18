@@ -1,0 +1,1 @@
+pring the same value (rand bug)

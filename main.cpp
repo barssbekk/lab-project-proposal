@@ -64,6 +64,7 @@ string randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house);
 
 
 int main() {
+    srand(0);
     map<string, array<list<string>, MAX_ELEMENT>> house{};
 
     // open data
@@ -154,15 +155,21 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
 }
 
 string randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house) {
-    srand(0);
     vector<string> distCollect{};
     for (auto& room : house) {
         for (auto& dist : room.second[DISTURBANCE]) {
             distCollect.emplace_back(dist);
         }
     }
+
+    if (distCollect.empty())
+        return "No disturbance";
+
     //  int r = min + std::rand() % (max - min + 1);
     constexpr int rndMin{0};
-    const size_t rndNum{ rndMin + rand() % (distCollect.size() - 1 - rndMin + 1) }; // TODO: add rnd
+    const size_t rndNum{ rndMin + rand() % (distCollect.size() - rndMin) }; // TODO: add rnd
+    for (auto& pickRand : distCollect) {
+        
+    }
     return distCollect.at(rndNum);
 }
