@@ -143,7 +143,7 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
             }
 
             // FIXME: using hardcoded disturbance, replace with var/event
-            room.second[DISTURBANCE].push_back(randDisturbance(room.second[DISTURBANCE])); // place holder // add DISTURBANCE
+            room.second[DISTURBANCE].push_back(randDisturbance(house)); // place holder // add DISTURBANCE
 
             if (room.second[DISTURBANCE].size() > MAX_DISTURBANCES) {
                 room.second[DISTURBANCE].pop_front();
@@ -164,11 +164,12 @@ string randDisturbance(list<string>& distList) {
     //     distCollect.emplace_back(i);
 
     constexpr int rndMin{0};
-    const size_t rndNum{ rndMin + rand() % (distList.size() - rndMin) }; // TODO: add rnd
+    size_t rndIndex{ rndMin + rand() % (distList.size() - rndMin) }; // TODO: add rnd
 
-    for (auto it{distList.begin()}; it < rndNum; ++it) {
-
+    auto it{distList.begin()};
+    for (int i{0}; i < rndIndex; ++i) {
+        ++it;
     }
 
-    return "";
+    return *it;
 }
