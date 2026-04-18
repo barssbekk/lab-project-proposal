@@ -1,0 +1,33 @@
+The program was tested by checking each part to make sure it works correctly.
+
+1. File reading was tested by loading data from the input file and printing the initial house.
+This confirmed that rooms and categories were stored correctly.
+
+2. The printHouse function was checked to ensure all rooms and their data are displayed clearly.
+
+3. The runSimulation function was tested by running a few steps and then all 25 steps.
+This showed that manifestations are removed over time and disturbances are added.
+
+Edge cases were also checked, such as when a room has no more manifestations
+to make sure the program doesn't crash.
+
+The data changes over time and the simulation behaves as expected.
+
+
+---------DRIVER---------
+#include <iostream>
+#include <map>
+#include <list>
+#include <array>
+using namespace std;
+
+int main() {
+    map<string, array<list<string>, 3>> house{};
+
+    house["TestRoom"][0].push_back("Ghost");
+    house["TestRoom"][2].push_back("Noise");
+
+    runSimulation(house, 2);
+
+    return 0;
+}

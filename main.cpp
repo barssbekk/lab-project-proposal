@@ -43,28 +43,104 @@
 #include <map>
 #include <list>
 #include <array>
+#include <fstream>
 using namespace std;
 
-void runSimulation(map<string, array<list<string>, 3>>& house, const int steps) {
-    for (int i{1}; i <= steps; ++i) {
-        cout << "Time Step " << i << endl;
+constexpr int MAX_ELEMENT{3};
+constexpr int MAX_STEPS{25};
 
-        for (auto& room : house)
-            cout << "Room: " << room.first << '\n';
+constexpr int MANIFESTATIONS{0};
+constexpr int ATMOSPHERIC{1};
+constexpr int DISTURBANCE{2};
+
+constexpr size_t MAX_DISTURBANCES{5};
+
+void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house);
+
+void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, int steps);
+
+
+int main() {
+    map<string, array<list<string>, MAX_ELEMENT>> house{};
+
+    // open data
+    fstream data{"data.txt"};
+    if (!data) {
+        cerr << "File not found\n";
+        return 1;
+    }
+
+    string inputLine{};
+
+    while (getline(data, inputLine)) { //
+        size_t pos1{inputLine.find(',')}; // starts from 0
+        size_t pos2{inputLine.find(',', pos1 + 1)};
+
+        string room{inputLine.substr(0, pos1)};
+        string category{inputLine.substr(pos1 + 1, pos2 - (pos1 + 1))};
+                                                     // final - initial (position)
+        string value{inputLine.substr(pos2 + 1)};
+
+        int index{};
+        if (category == "manifestation")
+            index = MANIFESTATIONS;
+        else if (category == "atmospheric")
+            index = ATMOSPHERIC;
+        else if (category == "disturbance")
+            index = DISTURBANCE;
+        house[room][index].push_back(value);
+    }
+
+    cout << "Initial State:\n";
+    printHouse(house);
+    runSimulation(house, MAX_STEPS);
+
+    return 0;
+}
+
+void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
+    for (auto& room : house) {
+        cout << "Room: " << room.first << '\n';
+
+        cout << "\tManifestations: ";
+        for (auto& manif : room.second[MANIFESTATIONS]) {
+            cout << manif << " ";
+        }
+        cout << '\n';
+
+        cout << "\tAtmospheric: ";
+        for (auto& atmo : room.second[ATMOSPHERIC]) {
+            cout << atmo << " ";
+        }
+        cout << '\n';
+
+        cout << "\tDisturbance: ";
+        for (auto& dist : room.second[DISTURBANCE]) {
+            cout << dist << " ";
+        }
+        cout << '\n';
+        cout << "====================================\n";
     }
 }
 
-int main() {
-    // FIXME: add const for time_period and categ
-    map<string, array<list<string>, 3>> house{};
+void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
+    for (int i{1}; i <= steps; ++i) {
+        cout << "\nTime Step " << i << '\n';
+        for (auto& room : house) { // remove
+            if (!room.second[MANIFESTATIONS].empty()) {
+                room.second[MANIFESTATIONS].pop_back();
+                cout << "\tRemoved manifestation from " << room.first << '\n';
+            } else {
+                // cout << "\tNo manifestations in " << room.first << '\n';
+            }
 
-    house["Basement"][0].push_back("Ghost");
+            // FIXME: using hardcoded disturbance, replace with var/event
+            room.second[DISTURBANCE].push_back("Footstep"); // place holder
 
-    for (const auto& room : house)
-        cout << room.first << " loaded\n";
-    cout << "----------------\n";
-
-    runSimulation(house, 25);
-
-    return 0;
+            if (room.second[DISTURBANCE].size() > MAX_DISTURBANCES) {
+                room.second[DISTURBANCE].pop_front();
+            }
+        }
+    }
+    printHouse(house);
 }
