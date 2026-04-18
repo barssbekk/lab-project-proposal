@@ -45,6 +45,8 @@
 #include <array>
 #include <fstream>
 #include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
 constexpr int MAX_ELEMENT{3};
@@ -60,11 +62,11 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house);
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, int steps);
 
-string randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house);
+string randDisturbance(list<string>& distList);
 
 
 int main() {
-    srand(0);
+    srand(time(nullptr));
     map<string, array<list<string>, MAX_ELEMENT>> house{};
 
     // open data
@@ -143,7 +145,7 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
             }
 
             // FIXME: using hardcoded disturbance, replace with var/event
-            room.second[DISTURBANCE].push_back(randDisturbance(house)); // place holder // add DISTURBANCE
+            room.second[DISTURBANCE].push_back(randDisturbance(room.second[DISTURBANCE])); // place holder // add DISTURBANCE
 
             if (room.second[DISTURBANCE].size() > MAX_DISTURBANCES) {
                 room.second[DISTURBANCE].pop_front();
@@ -155,8 +157,6 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
 }
 
 string randDisturbance(list<string>& distList) {
-    vector<string> distCollect{};
-
     if (distList.empty())
         return "No disturbance";
 
