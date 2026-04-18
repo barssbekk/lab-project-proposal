@@ -89,8 +89,10 @@ int main() {
         house[room][index].push_back(value);
     }
 
+    cout << "Initial State:\n";
     printHouse(house);
-
+    cout << "111111111";
+    runSimulation(house, MAX_STEPS);
 
     return 0;
 }
@@ -116,14 +118,22 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
             cout << dist << " ";
         }
         cout << '\n';
+        cout << "====================================\n";
     }
 }
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
     for (int i{1}; i <= steps; ++i) {
-        cout << "Time Step " << i << endl;
+        cout << "\nTime Step " << i << endl;
 
-        for (auto& room : house)
-            cout << "Room: " << room.first << '\n';
+        for (auto& room : house) {
+            for (auto& chosenRoom : room.second[MANIFESTATIONS]) {
+                if (chosenRoom.empty()) {
+                    cout << "Room is empty.\n";
+                } else {
+                    chosenRoom.erase()
+                }
+            }
+        }
     }
 }
