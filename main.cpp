@@ -100,9 +100,22 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
         cout << "Room: " << room.first << '\n';
 
         cout << "\tManifestations: ";
-        for (auto& rest : room.second) {
-            cout << "\t";
+        for (auto& manif : room.second[MANIFESTATIONS]) {
+            cout << manif << " ";
         }
+        cout << '\n';
+
+        cout << "\tAtmospheric: ";
+        for (auto& atmo : room.second[ATMOSPHERIC]) {
+            cout << atmo << " ";
+        }
+        cout << '\n';
+
+        cout << "\tDisturbance: ";
+        for (auto& dist : room.second[DISTURBANCE]) {
+            cout << dist << " ";
+        }
+        cout << '\n';
     }
 }
 
