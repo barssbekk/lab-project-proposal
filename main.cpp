@@ -154,8 +154,12 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
 
 string randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house) {
     vector<string> distCollect{};
-    for (auto& dist : house) {
-        distCollect.emplace_back(dist.second[DISTURBANCE]);
+    for (auto& room : house) {
+        for (auto& dist : room.second[DISTURBANCE]) {
+            distCollect.emplace_back(dist);
+        }
     }
-    return "";
+    //  int r = min + std::rand() % (max - min + 1);
+    int rndMin{0};
+    int rndNum{rnd} // TODO: add rnd
 }
