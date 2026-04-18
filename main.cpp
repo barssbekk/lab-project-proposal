@@ -53,14 +53,10 @@ constexpr int MANIFESTATIONS{0};
 constexpr int ATMOSPHERIC{1};
 constexpr int DISTURBANCE{2};
 
-void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
-    for (int i{1}; i <= steps; ++i) {
-        cout << "Time Step " << i << endl;
+void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house);
 
-        for (auto& room : house)
-            cout << "Room: " << room.first << '\n';
-    }
-}
+void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, int steps);
+
 
 int main() {
     map<string, array<list<string>, MAX_ELEMENT>> house{};
@@ -93,20 +89,28 @@ int main() {
         house[room][index].push_back(value);
     }
 
-    house["Basement"][MANIFESTATIONS].emplace_back("Ghost");
+    printHouse(house);
 
-    // test
-    // for (const auto& room : house)
-    //     cout << room.first << " loaded\n";
-    // cout << "----------------\n";
-    //
-    // runSimulation(house, 25);
 
     return 0;
 }
 
 void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
-    for (auto& room: house) {
-        cout << "Room: " <<
+    for (auto& room : house) {
+        cout << "Room: " << room.first << '\n';
+
+        cout << "\tManifestations: ";
+        for (auto& rest : room.second) {
+            cout << "\t";
+        }
+    }
+}
+
+void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
+    for (int i{1}; i <= steps; ++i) {
+        cout << "Time Step " << i << endl;
+
+        for (auto& room : house)
+            cout << "Room: " << room.first << '\n';
     }
 }
