@@ -130,6 +130,7 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
 }
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
+    map<string, array<list<string>, MAX_ELEMENT>> origHouse{house};
     for (int i{1}; i <= steps; ++i) {
         cout << "\nTime Step " << i << '\n';
         for (auto& room : house) { // remove manif
@@ -145,7 +146,8 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
             }
 
             // FIXME: using hardcoded disturbance, replace with var/event
-            room.second[DISTURBANCE].push_back(randDisturbance(room.second[DISTURBANCE])); // place holder // add DISTURBANCE
+            string newEvent{ randDisturbance(origHouse[room.first][DISTURBANCE]) };
+            room.second[DISTURBANCE].push_back(newEvent);
 
             if (room.second[DISTURBANCE].size() > MAX_DISTURBANCES) {
                 room.second[DISTURBANCE].pop_front();
