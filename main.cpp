@@ -143,7 +143,7 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
             }
 
             // FIXME: using hardcoded disturbance, replace with var/event
-            room.second[DISTURBANCE].push_back(randDisturbance(house)); // place holder // add DISTURBANCE
+            room.second[DISTURBANCE].push_back(randDisturbance(room.second[DISTURBANCE])); // place holder // add DISTURBANCE
 
             if (room.second[DISTURBANCE].size() > MAX_DISTURBANCES) {
                 room.second[DISTURBANCE].pop_front();
@@ -154,9 +154,9 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
     printHouse(house);
 }
 
-string randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house) {
+string randDisturbance(list<string>& distList) {
     vector<string> distCollect{};
-    for (auto& room : house) {
+    for (auto& room : distList) {
         for (auto& dist : room.second[DISTURBANCE]) {
             distCollect.emplace_back(dist);
         }
@@ -168,8 +168,8 @@ string randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house) {
     //  int r = min + std::rand() % (max - min + 1);
     constexpr int rndMin{0};
     const size_t rndNum{ rndMin + rand() % (distCollect.size() - rndMin) }; // TODO: add rnd
-    for (auto& pickRand : distCollect) {
-        
-    }
+    // for (auto& pickRand : distCollect) {
+    //
+    // }
     return distCollect.at(rndNum);
 }
