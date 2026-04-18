@@ -125,15 +125,11 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
     for (int i{1}; i <= steps; ++i) {
         cout << "\nTime Step " << i << endl;
-
         for (auto& room : house) {
-            for (auto& chosenRoom : room.second[MANIFESTATIONS]) {
-                if (chosenRoom.empty()) {
-                    cout << "Room is empty.\n";
-                } else {
-                    chosenRoom.erase()
-                }
-            }
+            if (!room.second[MANIFESTATIONS].empty()) {
+                room.second[MANIFESTATIONS].pop_back();
+            } else
+                cout << "Room is empty\n";
         }
     }
 }
