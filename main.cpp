@@ -152,6 +152,10 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
     printHouse(house);
 }
 
-void randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house) {
-    while ()
+string randDisturbance(map<string, array<list<string>, MAX_ELEMENT>>& house) {
+    vector<string> distCollect{};
+    for (auto& dist : house) {
+        distCollect.emplace_back(dist.second[DISTURBANCE]);
+    }
+    return "";
 }
