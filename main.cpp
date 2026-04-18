@@ -157,17 +157,18 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
 string randDisturbance(list<string>& distList) {
     vector<string> distCollect{};
 
-    if (distCollect.empty())
+    if (distList.empty())
         return "No disturbance";
 
-    for (auto& i : distList)
-        distCollect.emplace_back(i);
+    // for (auto& i : distList)
+    //     distCollect.emplace_back(i);
 
-    //  int r = min + std::rand() % (max - min + 1);
     constexpr int rndMin{0};
-    const size_t rndNum{ rndMin + rand() % (distCollect.size() - rndMin) }; // TODO: add rnd
-    // for (auto& pickRand : distCollect) {
-    //
-    // }
-    return distCollect.at(rndNum);
+    const size_t rndNum{ rndMin + rand() % (distList.size() - rndMin) }; // TODO: add rnd
+
+    for (auto it{distList.begin()}; it < rndNum; ++it) {
+
+    }
+
+    return "";
 }
