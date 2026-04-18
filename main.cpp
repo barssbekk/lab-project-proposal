@@ -84,7 +84,6 @@ int main() {
         string value{inputLine.substr(pos2 + 1)};
 
         int index{};
-
         if (category == "manifestation")
             index = MANIFESTATIONS;
         else if (category == "atmospheric")
@@ -104,4 +103,10 @@ int main() {
     // runSimulation(house, 25);
 
     return 0;
+}
+
+void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
+    for (auto& room: house) {
+        cout << "Room: " <<
+    }
 }
