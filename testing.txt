@@ -1,0 +1,6 @@
+The program was tested by checking each part to make sure it works correctly.
+
+1. File reading was tested by loading data from the input file and printing the initial house.
+This confirmed that rooms and categories were stored correctly.
+
+2. The printHouse function was checked to ensure all rooms and their data are displayed clearly.

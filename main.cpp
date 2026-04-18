@@ -53,6 +53,8 @@ constexpr int MANIFESTATIONS{0};
 constexpr int ATMOSPHERIC{1};
 constexpr int DISTURBANCE{2};
 
+constexpr size_t MAX_DISTURBANCES{5};
+
 void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house);
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, int steps);
@@ -123,15 +125,22 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
     for (int i{1}; i <= steps; ++i) {
-        cout << "\nTime Step " << i << endl;
+        cout << "\nTime Step " << i << '\n';
         for (auto& room : house) { // remove
             if (!room.second[MANIFESTATIONS].empty()) {
                 room.second[MANIFESTATIONS].pop_back();
-                cout << "\tRemoved manifestation from" << room.first << '\n';
-            } else
-                cout << "\tNo manifestations in " << room.first << '\n';
+                cout << "\tRemoved manifestation from " << room.first << '\n';
+            } else {
+                // cout << "\tNo manifestations in " << room.first << '\n';
+            }
+
             // FIXME: using hardcoded disturbance, replace with var/event
             room.second[DISTURBANCE].push_back("Footstep"); // place holder
+
+            if (room.second[DISTURBANCE].size() > MAX_DISTURBANCES) {
+                room.second[DISTURBANCE].pop_front();
+            }
         }
     }
+    printHouse(house);
 }
