@@ -78,7 +78,7 @@ int main() {
 
     string inputLine{};
 
-    while (getline(data, inputLine)) { //
+    while (getline(data, inputLine)) {
         size_t pos1{inputLine.find(',')}; // starts from 0
         size_t pos2{inputLine.find(',', pos1 + 1)};
 
@@ -94,12 +94,13 @@ int main() {
             index = ATMOSPHERIC;
         else if (category == "disturbance")
             index = DISTURBANCE;
+        // group data by room and type
         house[room][index].push_back(value);
     }
 
     cout << "Initial State:\n";
     printHouse(house);
-    runSimulation(house, MAX_STEPS);
+    runSimulation(house, MAX_STEPS); // simulate changes over time
 
     return 0;
 }
@@ -130,6 +131,7 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
 }
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
+    // keep original data unchanged to use as a stable source
     map<string, array<list<string>, MAX_ELEMENT>> origHouse{house};
     for (int i{1}; i <= steps; ++i) {
         cout << "\nTime Step " << i << '\n';
@@ -137,22 +139,22 @@ void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const i
             if (!room.second[MANIFESTATIONS].empty()) {
                 room.second[MANIFESTATIONS].pop_back();
                 cout << "\tRemoved manifestation from " << room.first << '\n';
-            } else {
-                // cout << "\tNo manifestations in " << room.first << '\n';
             }
 
+            // removing atmospheric effects over time
             if (!room.second[ATMOSPHERIC].empty()) {
                 room.second[ATMOSPHERIC].pop_back();
             }
 
-            // FIXME: using hardcoded disturbance, replace with var/event
-            string newEvent{ randDisturbance(origHouse[room.first][DISTURBANCE]) };
-            room.second[DISTURBANCE].push_back(newEvent);
+            string newDisturb{ randDisturbance(origHouse[room.first][DISTURBANCE]) };
+            // pick from original list so randomness doesn’t shrink over time
+            room.second[DISTURBANCE].push_back(newDisturb);
+            cout << "\tAdded disturbance: " << newDisturb << " in " << room.first << '\n';
 
+            // limit list size to avoid unbounded growth
             if (room.second[DISTURBANCE].size() > MAX_DISTURBANCES) {
                 room.second[DISTURBANCE].pop_front();
             }
-
         }
     }
     printHouse(house);
@@ -162,12 +164,8 @@ string randDisturbance(list<string>& distList) {
     if (distList.empty())
         return "No disturbance";
 
-    // for (auto& i : distList)
-    //     distCollect.emplace_back(i);
-
-    constexpr int rndMin{0};
-    size_t rndIndex{ rndMin + rand() % (distList.size() - rndMin) }; // TODO: add rnd
-
+    const size_t rndIndex{ rand() % distList.size()  };
+    // ensure index is always within bounds
     auto it{distList.begin()};
     for (int i{0}; i < rndIndex; ++i) {
         ++it;
