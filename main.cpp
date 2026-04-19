@@ -44,6 +44,9 @@
 #include <list>
 #include <array>
 #include <fstream>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
 constexpr int MAX_ELEMENT{3};
@@ -59,8 +62,11 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house);
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, int steps);
 
+string randDisturbance(list<string>& distList);
+
 
 int main() {
+    srand(time(nullptr));
     map<string, array<list<string>, MAX_ELEMENT>> house{};
 
     // open data
@@ -72,7 +78,7 @@ int main() {
 
     string inputLine{};
 
-    while (getline(data, inputLine)) { //
+    while (getline(data, inputLine)) {
         size_t pos1{inputLine.find(',')}; // starts from 0
         size_t pos2{inputLine.find(',', pos1 + 1)};
 
@@ -88,12 +94,13 @@ int main() {
             index = ATMOSPHERIC;
         else if (category == "disturbance")
             index = DISTURBANCE;
+        // group data by room and type
         house[room][index].push_back(value);
     }
 
     cout << "Initial State:\n";
     printHouse(house);
-    runSimulation(house, MAX_STEPS);
+    runSimulation(house, MAX_STEPS); // simulate changes over time
 
     return 0;
 }
@@ -124,23 +131,45 @@ void printHouse(map<string, array<list<string>, MAX_ELEMENT>>& house) {
 }
 
 void runSimulation(map<string, array<list<string>, MAX_ELEMENT>>& house, const int steps) {
+    // keep original data unchanged to use as a stable source
+    map<string, array<list<string>, MAX_ELEMENT>> origHouse{house};
     for (int i{1}; i <= steps; ++i) {
         cout << "\nTime Step " << i << '\n';
-        for (auto& room : house) { // remove
+        for (auto& room : house) { // remove manif
             if (!room.second[MANIFESTATIONS].empty()) {
                 room.second[MANIFESTATIONS].pop_back();
                 cout << "\tRemoved manifestation from " << room.first << '\n';
-            } else {
-                // cout << "\tNo manifestations in " << room.first << '\n';
             }
 
-            // FIXME: using hardcoded disturbance, replace with var/event
-            room.second[DISTURBANCE].push_back("Footstep"); // place holder
+            // removing atmospheric effects over time
+            if (!room.second[ATMOSPHERIC].empty()) {
+                room.second[ATMOSPHERIC].pop_back();
+            }
 
+            string newDisturb{ randDisturbance(origHouse[room.first][DISTURBANCE]) };
+            // pick from original list so randomness doesn’t shrink over time
+            room.second[DISTURBANCE].push_back(newDisturb);
+            cout << "\tAdded disturbance: " << newDisturb << " in " << room.first << '\n';
+
+            // limit list size to avoid unbounded growth
             if (room.second[DISTURBANCE].size() > MAX_DISTURBANCES) {
                 room.second[DISTURBANCE].pop_front();
             }
         }
     }
     printHouse(house);
+}
+
+string randDisturbance(list<string>& distList) {
+    if (distList.empty())
+        return "No disturbance";
+
+    const size_t rndIndex{ rand() % distList.size()  };
+    // ensure index is always within bounds
+    auto it{distList.begin()};
+    for (int i{0}; i < rndIndex; ++i) {
+        ++it;
+    }
+
+    return *it;
 }

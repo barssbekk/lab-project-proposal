@@ -1,0 +1,32 @@
+1. Random value was always the same  
+   Fix: used srand(time(nullptr))
+
+2. Same disturbance repeated in rooms  
+   Fix: checked how random values are picked
+
+3. Wrong data passed to a function
+   Fix: passed list instead of full map
+
+4. Loop over data didn’t work  
+   Fix: fixed loop syntax
+
+5. Error picking random item from list
+   Fix: used iterator and loop
+
+6. Added disturbance to wrong list
+   Fix: used DISTURBANCE index
+
+7. List got too big
+   Fix: used pop_front()
+
+8. Function returned wrong value
+   Fix: fixed return statement
+
+9. Random didn’t look random
+    Fix: tested and adjusted logic
+
+10. Program didn’t add new disturbance
+    Fix: stored return value from randDisturbance and pushed it to list
+
+11. Used wrong list when adding new event
+    Fix: changed to room.second[DISTURBANCE]
